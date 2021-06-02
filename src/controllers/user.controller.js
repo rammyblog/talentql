@@ -117,6 +117,7 @@ const passwordReset = async (req, res) => {
         .status(400)
         .json({ error: "You can't use this password again" });
     }
+    user.password = password;
     await user.save();
     // Delete token if user is verified
     await token.remove();
