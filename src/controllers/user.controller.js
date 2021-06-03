@@ -12,6 +12,8 @@ const { getToken } = require('../services/token.services');
 
 const randomTokenGen = require('../utils/randomTokenGen');
 
+const sendEmail = require('../utils/email');
+
 const validationObject = {
   register: registerValidation,
   login: loginValidation,
@@ -30,7 +32,14 @@ const registerController = async (req, res) => {
   try {
     // Validate against JOI object
     await handleValidation(req.body, 'register');
-
+    const registrationEmailOptions = (email, subject, name) => {
+      return {
+        from: process.env.EMAIL, // sender address
+        to: email, // list of receivers
+        subject: `${subject} - [Talent ql]`, // Subject line
+        html: `<p>Welcome to talent ql test app ${name}. Enjoy your ride!<p>`, // plain text body
+      };
+    };
     const { email } = req.body;
     const emailExist = await getUser({ email });
 
@@ -41,6 +50,14 @@ const registerController = async (req, res) => {
     const user = new User(req.body);
     const savedUser = await user.save();
     const token = savedUser.getSignedToken();
+
+    await sendEmail(
+      registrationEmailOptions(
+        email,
+        'Welcome to TalentQl Test App',
+        req.body.name
+      )
+    );
     return res.status(201).json({
       success: 'true',
       message: 'Account registered successfully',
