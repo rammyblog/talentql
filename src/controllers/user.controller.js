@@ -109,6 +109,11 @@ const passwordReset = async (req, res) => {
     // User confirmation
     const user = await getUser({ email });
 
+    // Ensure user is not using another user token
+    if (String(user._id) !== String(token._userId)) {
+      return res.status(400).json({ error: 'You are using a wrong token' });
+    }
+
     // Ensure new password not equals to old password
     const passwordCompare = await user.matchPasswords(password);
 
