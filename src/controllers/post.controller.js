@@ -40,6 +40,9 @@ const createPostController = async (req, res) => {
 const getASinglePostController = async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
+    if (!post) {
+      res.status(404).json({ error: 'Post with that ID not found' });
+    }
     const { imageIds } = post;
 
     return res.status(200).json({
@@ -52,4 +55,17 @@ const getASinglePostController = async (req, res) => {
   }
 };
 
-module.exports = { createPostController, getASinglePostController };
+const deletePostController = async (req, res) => {
+  try {
+    await Post.findOneAndDelete({ _id: req.params.id });
+    return res.status(200).json({ success: true, message: 'Deleted success' });
+  } catch (error) {
+    return res.status(400).json({ error: error.message });
+  }
+};
+
+module.exports = {
+  createPostController,
+  getASinglePostController,
+  deletePostController,
+};
