@@ -10,7 +10,7 @@ const uploadToCloud = async (image) => {
   });
   try {
     const { secure_url } = await cloudinary.uploader.upload(image);
-    console.log(secure_url);
+
     return secure_url;
   } catch (error) {
     throw error;

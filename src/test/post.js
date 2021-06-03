@@ -44,19 +44,20 @@ describe('Post API', () => {
             res.body.should.have.property('token');
             let { token } = res.body;
             let imagePath = path.join(__dirname, 'file.jpg');
+
             chai
               .request(server)
               .post('/api/posts-images')
               .set('Authorization', `Bearer ${token}`)
               .set('content-type', 'multipart/form-data')
-              .attach('images', fs.readFileSync(imagePath))
+              .attach('images', imagePath)
               .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('object');
                 res.body.should.have
                   .property('message')
                   .eql('All files successfully uploaded');
-                console.log(res.body);
+
                 let imageId = res.body.data[0]._id;
 
                 chai

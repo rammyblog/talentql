@@ -5,10 +5,11 @@ const uploadToCloud = require('../utils/cloudinary');
 const uploadPostImagesController = async (req, res) => {
   try {
     const urls = [];
-    if (req.files) {
+    // console.log()
+    if (req.files && req.files.length > 0) {
       for (const file of req.files) {
         const { path } = file;
-        console.log(file);
+        // console.log(file);
         urls.push(uploadToCloud(path));
         fs.unlinkSync(path);
       }
