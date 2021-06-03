@@ -12,6 +12,7 @@ const PostSchema = new Schema({
       type: Schema.Types.ObjectId,
       required: false,
       ref: 'PostImage',
+      unique: true,
     },
   ],
 });

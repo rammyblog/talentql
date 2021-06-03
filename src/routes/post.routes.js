@@ -1,6 +1,9 @@
 const router = require('express').Router();
 
-const { createPostController } = require('../controllers/post.controller');
+const {
+  createPostController,
+  getASinglePostController,
+} = require('../controllers/post.controller');
 const ensureAuth = require('../middlewares/ensureAuth');
 
 // Create post route
@@ -8,5 +11,11 @@ const ensureAuth = require('../middlewares/ensureAuth');
 // @route POST /api/posts/
 // @access Private
 router.post('/', ensureAuth, createPostController);
+
+// Fetch a post route
+// @desc Getting of a post
+// @route POST /api/posts/:id
+// @access Private
+router.get('/:id', ensureAuth, getASinglePostController);
 
 module.exports = router;
