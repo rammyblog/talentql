@@ -4,6 +4,7 @@ const {
   createPostController,
   getASinglePostController,
   deletePostController,
+  editPostController,
 } = require('../controllers/post.controller');
 const ensureAuth = require('../middlewares/ensureAuth');
 
@@ -24,5 +25,11 @@ router.get('/:id', ensureAuth, getASinglePostController);
 // @route DELETE /api/posts/:id
 // @access Private
 router.delete('/:id', ensureAuth, deletePostController);
+
+// Edit a post route
+// @desc Editing of a post
+// @route PATCH /api/posts/:id
+// @access Private
+router.patch('/:id', ensureAuth, editPostController);
 
 module.exports = router;

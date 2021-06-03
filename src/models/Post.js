@@ -15,6 +15,11 @@ const PostSchema = new Schema({
       unique: true,
     },
   ],
+  user: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: 'User',
+  },
 });
 
 const Post = model('Post', PostSchema);

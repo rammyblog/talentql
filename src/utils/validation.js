@@ -70,6 +70,15 @@ const newPostValidation = (data) => {
   return schema.validate(data);
 };
 
+const editPostValidation = (data) => {
+  const schema = Joi.object({
+    content: Joi.string().min(1).max(5000),
+    imageIds: Joi.array().min(1).unique().items(Joi.string().min(1)),
+  });
+
+  return schema.validate(data);
+};
+
 module.exports = {
   loginValidation,
   registerValidation,
@@ -78,4 +87,5 @@ module.exports = {
   passwordResetValidation,
   passwordChangeValidation,
   newPostValidation,
+  editPostValidation,
 };
