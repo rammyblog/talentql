@@ -8,8 +8,8 @@ const uploadPostImagesController = async (req, res) => {
     if (req.files) {
       for (const file of req.files) {
         const { path } = file;
+        console.log(file);
         urls.push(uploadToCloud(path));
-        // const newPath = await uploadToCloud(file);
         fs.unlinkSync(path);
       }
       const imageUrls = await Promise.all(urls);
@@ -24,6 +24,8 @@ const uploadPostImagesController = async (req, res) => {
         message: 'All files successfully uploaded',
         data: await Promise.all(data),
       });
+    } else {
+      return res.status(400).json({ error: 'No image sent' });
     }
   } catch (error) {
     console.log(error);

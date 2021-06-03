@@ -20,4 +20,6 @@ app.use('/api/users', userRoutes);
 app.use('/api/posts', postRoutes);
 app.use('/api/posts-images', postImagesRoutes);
 
-app.listen(PORT, () => console.log(`App is running on port: ${PORT}`));
+app.listen(PORT, () => console.log(`App is running on ports: ${PORT}`));
+
+module.exports = app;

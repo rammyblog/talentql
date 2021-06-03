@@ -19,7 +19,9 @@ const handleValidation = (body, type) => {
 const composePostResponse = async (post, imageIds) => {
   const images = await PostImage.find({ _id: imageIds });
   const { content, _id, user } = post;
-  const responseData = { content, _id, images, user };
+  const responseData = {
+    content, _id, images, user
+  };
   return responseData;
 };
 const createPostController = async (req, res) => {
@@ -62,14 +64,16 @@ const getASinglePostController = async (req, res) => {
 
 const deletePostController = async (req, res) => {
   try {
+    const post = await Post.findById(req.params.id);
     if (String(req.user._id) !== String(post.user)) {
       return res
         .status(401)
-        .json({ error: `You don't have permission to delete this post` });
+        .json({ error: 'You don\'t have permission to delete this post' });
     }
     await Post.findOneAndDelete({ _id: req.params.id });
     return res.status(200).json({ success: true, message: 'Deleted success' });
   } catch (error) {
+    console.log(error);
     return res.status(400).json({ error: error.message });
   }
 };
@@ -84,7 +88,7 @@ const editPostController = async (req, res) => {
     if (String(req.user._id) !== String(post.user)) {
       return res
         .status(401)
-        .json({ error: `You don't have permission to edit this post` });
+        .json({ error: 'You don\'t have permission to edit this post' });
     }
     const updatedPost = await Post.findByIdAndUpdate(
       { _id: req.params.id },
