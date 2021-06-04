@@ -69,6 +69,15 @@ describe('Post API', () => {
                     imageIds: [imageId],
                   })
                   .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a('object');
+                    res.body.should.have
+                      .property('message')
+                      .eql('Post created successfully');
+                    res.body.data.should.have
+                      .property('content')
+                      .eql('Hello world from talent ql test');
+                    res.body.data.images[0]._id.should.equal(imageId);
                     done();
                     // chai
                     //   .request(server)
@@ -89,8 +98,75 @@ describe('Post API', () => {
           });
       });
   });
+  it('should Register user, login user, check token, create a post on api/posts/ POST then GET the post on api/posts/:id', (done) => {
+    chai
+      .request(server)
+      // register request
+      .post('/api/users/signup')
+      // send user registration details
+      .send({
+        name: 'onasanyatunde1245@gmail.com',
+        email: 'testerss@gmail.com',
+        password: 'testers',
+      })
+      .end((err, res) => {
+        // the res object should have a status of 201
+        res.should.have.status(201);
+        // follow up with login
+        chai
+          .request(server)
+          .post('/api/users/login')
+          // send user login details
+          .send({
+            email: 'testerss@gmail.com',
+            password: 'testers',
+          })
+          .end((err, res) => {
+            console.log('this runs the login part');
+            res.body.should.have.property('token');
+            let { token } = res.body;
+            chai
+              .request(server)
+              .post('/api/posts')
+              .set('Authorization', `Bearer ${token}`)
+              .send({
+                content: 'Hello world from talent ql test',
+              })
+              .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a('object');
+                res.body.should.have
+                  .property('message')
+                  .eql('Post created successfully');
+                res.body.data.should.have
+                  .property('content')
+                  .eql('Hello world from talent ql test');
+                chai
+                  .request(server)
+                  .get(`/api/posts/${res.body.data._id}`)
+
+                  // we set the auth header with our token
+                  .set('Authorization', `Bearer ${token}`)
+                  .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a('object');
+                    res.body.should.have
+                      .property('message')
+                      .eql('Post retrieved successfully');
+                    res.body.data.should.have
+                      .property('content')
+                      .eql('Hello world from talent ql test');
+                    done();
+                  });
+              });
+          });
+      });
+  });
   afterEach((done) => {
     User.findOneAndDelete({ email: 'testerss@gmail.com' }).exec();
+    Post.findOneAndDelete({
+      content: 'Hello world from talent ql test',
+    }).exec();
     done();
   });
   after((done) => {
