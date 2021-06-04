@@ -1,28 +1,14 @@
-<h1 align="center">Welcome to Mern Admin Dashboard 👋</h1>
-<p>
-  <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
-  <a href="#" target="_blank">
-    <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
-  </a>
-  <a href="https://twitter.com/simply_rammy" target="_blank">
-    <img alt="Twitter: simply_rammy" src="https://img.shields.io/twitter/follow/simply_rammy.svg?style=social" />
-  </a>
-</p>
+<h1 align="center">Welcome to my submission for the TalentQL stage two problem👋</h1>
 
-> An admin dashboard built using Node, Express, Node and React to for managing users easily. Coming from a django background, there is a free admin panel all models, So I decided to build one with MERN so I could easily manage the user data easily.
 
-> To test the live
+> This is a RESTful API that supports the posts functionality of Facebook.
 
-```
-Email: test@gmail.com
-Password: testing
-```
 
-### 🏠 [Homepage](https://mern-admin-dashboard.herokuapp.com)
+### 🏠 [API Documentation](https://documenter.getpostman.com/view/15213147/TzY4eZmf)
 
-### ✨ [Demo](https://mern-admin-dashboard.herokuapp.com/dashboard/)
 
 ## Install
+To install clone the repo on your local machine then in the root directory run
 
 ```sh
 npm install
@@ -33,13 +19,18 @@ npm install
 > To get this project running pefectly on your local, ensure you follow the instructions below.
 
 1. Create a .env file in the root directory.
-2. In the .env file ensure you have the following setup.
+2. In the .env file ensure you have the following setup. (An example has been provided in the .env.example file)
 
 ```
-MONGODB_URI=YOUR MONGODB URI
-TOKEN_SECRET = THIS IS FOR THE SIGNING THE JWT, YOU CAN USE ANY RANDOM CHARACTERS
-BASE_URL=http://localhost:8000/api/
-port=YOUR PREFERRED PORT i.e 8000
+PORT=YOUR PREFERRED PORT
+MONGO_URI=YOUR MONGO DB URL
+TOKEN_SECRET=YOUR TOKEN SECRET, IT COULD BE ANY RANDOM WORDS
+JWT_EXPIRATION=THE TIME IT WILL TAKE FOR THE JTW TO EXPIRE i.e 1d
+SENDGRID_API_KEY=YOUR SENDGRID API KEY
+EMAIL=THE EMAIL ATTACHED OF YOUR SENDGRID 
+CLOUDINARY_NAME=THE NAME OF YOUR CLOUDINARY 
+CLOUDINARY_API_KEY=YOUR CLOUDINARY API KEY
+CLOUDINARY_SECRET=YOUR CLOUDINARY SECRET KEY
 ```
 
 3. Run the npm command below
@@ -48,19 +39,14 @@ port=YOUR PREFERRED PORT i.e 8000
 npm run dev
 ```
 
-4. Refer to the docs located at /api/v1/docs/ i.e http://localhost:8000api/v1/docs/ to create a user.
+4. Refer to the docs located at https://documenter.getpostman.com/view/15213147/TzY4eZmf 
 
-5. Visit http://localhost:8000 to login the user you created.
 
 ## Run tests
 
 ```sh
 npm run test
 ```
-
-## Contribution
-
-If you find an issue running this project please send in a PR.
 
 ## Author
 
@@ -70,9 +56,3 @@ If you find an issue running this project please send in a PR.
 - Twitter: [@simply_rammy](https://twitter.com/simply_rammy)
 - Github: [@rammyblog](https://github.com/rammyblog)
 - LinkedIn: [@onasanya-tunde](https://linkedin.com/in/onasanya-tunde)
-
-## Show your support
-
-Give a ⭐️ if this project helped you!
-
----
