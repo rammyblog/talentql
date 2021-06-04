@@ -14,6 +14,8 @@ To install clone the repo on your local machine then in the root directory run
 npm install
 ```
 
+## Documentation
+- Postman Documentation can be found here: https://documenter.getpostman.com/view/15213147/TzY4eZmf
 ## Usage
 
 > To get this project running pefectly on your local, ensure you follow the instructions below.

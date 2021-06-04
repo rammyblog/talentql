@@ -1,6 +1,5 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const mongoose = require('mongoose');
 const path = require('path');
 const Post = require('../models/Post');
 const User = require('../models/User');
