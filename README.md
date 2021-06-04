@@ -16,6 +16,14 @@ npm install
 
 ## Documentation
 - Postman Documentation can be found here: https://documenter.getpostman.com/view/15213147/TzY4eZmf
+
+## Technologies Used
+- Node
+- Express
+- Cloudinary
+- Sendgrid
+- Mongoose
+
 ## Usage
 
 > To get this project running pefectly on your local, ensure you follow the instructions below.
