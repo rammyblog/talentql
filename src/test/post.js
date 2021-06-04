@@ -302,8 +302,8 @@ describe('Post API', () => {
     done();
   });
   after((done) => {
-    mongoose.connection.close();
+    // mongoose.connection.close();
     server.close(done());
-    // done();
+    done();
   });
 });
