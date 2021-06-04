@@ -1,14 +1,13 @@
 const { Schema, model } = require('mongoose');
 
 const PostImageSchema = new Schema({
-  // _postId: {
-  //   type: Schema.Types.ObjectId,
-  //   required: false,
-  //   ref: 'Post',
-  // },
   imageUrl: {
     type: String,
     required: true,
+    match: [
+      /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/,
+      'Please provide a valid image url',
+    ],
   },
 });
 

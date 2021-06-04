@@ -1,10 +1,9 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const mongoose = require('mongoose');
+const path = require('path');
 const Post = require('../models/Post');
 const User = require('../models/User');
-const path = require('path');
-const fs = require('fs');
 const server = require('../server');
 // Assertion Style
 chai.should();
@@ -308,29 +307,3 @@ describe('Post API', () => {
     // done();
   });
 });
-
-// describe('/POST file', () => {
-//   it('Should POST a file', (done) => {
-//     console.log(`${__dirname}/file.png`);
-//     chai
-//       .request(server)
-//       .post('/api/post-images')
-//       .set('content-type', 'multipart/form-data')
-//       .attach(
-//         'images',
-//         fs.readFileSync(`${__dirname}/file.png`),
-//         'tests/file.png'
-//       )
-//       .send(file)
-//       .end((err, res) => {
-//         if (err) {
-//           console.log(err);
-//         } else {
-//           res.should.have.status(200);
-//           res.body.should.be.a('object');
-//           res.body.should.have.property('data').eql('File Uploaded');
-//         }
-//         done();
-//       });
-//   });
-// });
