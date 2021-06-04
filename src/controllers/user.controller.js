@@ -51,20 +51,19 @@ const registerController = async (req, res) => {
     const savedUser = await user.save();
     const token = savedUser.getSignedToken();
 
-    // await sendEmail(
-    //   registrationEmailOptions(
-    //     email,
-    //     'Welcome to TalentQl Test App',
-    //     req.body.name
-    //   )
-    // );
+    await sendEmail(
+      registrationEmailOptions(
+        email,
+        'Welcome to TalentQl Test App',
+        req.body.name
+      )
+    );
     return res.status(201).json({
       success: 'true',
       message: 'Account registered successfully',
       token,
     });
   } catch (error) {
-    console.log(error);
     return res.status(400).json({ error: error.message });
   }
 };

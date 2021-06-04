@@ -71,7 +71,6 @@ describe('AUTH API', () => {
             .post('/api/users/login')
             .send(loginData)
             .end((err, response) => {
-              console.log(response.body);
               response.should.have.status(200);
               response.body.should.be.a('object');
               response.body.should.have.property('token');
